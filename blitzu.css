@@ -1,0 +1,280 @@
+/* Blitzu Cyclops 120H Simulator by David H. Brown is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.  */
+/* Set basic display properties for the page and its elements*/
+html {
+    color: #666;
+    background-color: #000;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0 0.5em;
+    height: 100%;
+    /* disable user-select to help avoid long-touch events being interpreted as text selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a {
+    color: #44a;
+}
+
+a:visited {
+    color: #557;
+}
+
+#lamp {
+    margin: 0 auto;
+    width: 5cm;
+    height: 0.75cm;
+    border: .3cm #555 solid;
+    border-radius: 0.2cm;
+}
+
+/* Updated Sept '18 to show border highlight to indicate press */
+#button {
+    display: block;
+    margin: 0 auto;
+    width: 1cm;
+    height: 0.5cm;
+    background-color: #700;
+    cursor: pointer;
+    border: none;
+    border-left: medium solid #900;
+    border-top: medium solid #900;
+}
+
+#button.pressed {
+    background-color: #400;
+    border: none;
+    border-bottom: medium solid #700;
+    border-right: medium solid #700;
+}
+
+#warning {
+    text-align: center;
+    color: #ccc;
+    margin: 1em auto;
+    border: double thick #522285;
+    max-width: 40em;
+    padding: 1em;
+}
+
+#warning strong {
+    color: #F6EDFD;
+}
+
+#warning button {
+    margin: 1em auto;
+    background-color: #F6EDFD;
+    color: #522285;
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background-color: #333;
+    margin-top: 1em;
+    padding: 0.5em;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+/* The behavior of each lamp state is implemented with background color
+ * or animation of the background color. These are defined in CSS class
+ * rules. An JS event listener automatically switches to .lamp-off when
+ * the lamp.fade animation is completed.
+*/
+
+.lamp-high {
+    background-color: white;
+    -webkit-box-shadow: 0 0 2cm 2cm white;
+    -moz-box-shadow: 0 0 2cm 2cm white;
+    box-shadow: 0 0 2cm 2cm white;
+}
+
+.lamp-low {
+    background-color: #bbb;
+    -webkit-box-shadow: 0 0 0.5cm 0.5cm #bbb;
+    -moz-box-shadow: 0 0 0.5cm 0.5cm #bbb;
+    box-shadow: 0 0 0.5cm 0.5cm #bbb;
+}
+
+.lamp-mid {
+    background-color: #ddd;
+    -webkit-box-shadow: 0 0 1cm 1cm #ddd;
+    -moz-box-shadow: 0 0 1cm 1cm #ddd;
+    box-shadow: 0 0 1cm 1cm #ddd;
+}
+
+.lamp-off {
+    background-color: #331;
+}
+
+.lamp-fade {
+    -webkit-animation-iteration-count: 1;
+    -moz-animation-iteration-count: 1;
+    -o-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-name: lamp-fade;
+    -moz-animation-name: lamp-fade;
+    -o-animation-name: lamp-fade;
+    animation-name: lamp-fade;
+}
+
+.lamp-flash-high,
+.lamp-flash-low,
+.lamp-strobe-high {
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.lamp-flash-high,
+.lamp-flash-low {
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    -o-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+}
+
+.lamp-flash-high {
+    -webkit-animation-name: lamp-flash-high;
+    -moz-animation-name: lamp-flash-high;
+    -o-animation-name: lamp-flash-high;
+    animation-name: lamp-flash-high;
+}
+
+
+.lamp-flash-low {
+    -webkit-animation-name: lamp-flash-low;
+    -moz-animation-name: lamp-flash-low;
+    -o-animation-name: lamp-flash-low;
+    animation-name: lamp-flash-low;
+}
+
+.lamp-strobe-high {
+    -webkit-animation-duration: 0.125s;
+    -moz-animation-duration: 0.125s;
+    -o-animation-duration: 0.125s;
+    animation-duration: 0.125s;
+    -webkit-animation-name: lamp-strobe-high;
+    -moz-animation-name: lamp-strobe-high;
+    -o-animation-name: lamp-strobe-high;
+    animation-name: lamp-strobe-high;
+}
+
+@keyframes lamp-flash-high {
+    from {
+        background-color: white;
+        -webkit-box-shadow: 0 0 2cm 2cm white;
+        -moz-box-shadow: 0 0 2cm 2cm white;
+        box-shadow: 0 0 2cm 2cm white;
+    }
+
+    49% {
+        background-color: white;
+        -webkit-box-shadow: 0 0 2cm 2cm white;
+        -moz-box-shadow: 0 0 2cm 2cm white;
+        box-shadow: 0 0 2cm 2cm white;
+    }
+
+    50% {
+        background-color: #331;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    to {
+        background-color: #331;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+@keyframes lamp-flash-low {
+    from {
+        background-color: #bbb;
+        -webkit-box-shadow: 0 0 0.5cm 0.5cm #bbb;
+        -moz-box-shadow: 0 0 0.5cm 0.5cm #bbb;
+        box-shadow: 0 0 0.5cm 0.5cm #bbb;
+    }
+
+    49% {
+        background-color: #bbb;
+        -webkit-box-shadow: 0 0 0.5cm 0.5cm #bbb;
+        -moz-box-shadow: 0 0 0.5cm 0.5cm #bbb;
+        box-shadow: 0 0 0.5cm 0.5cm #bbb;
+    }
+
+    50% {
+        background-color: #331;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    to {
+        background-color: #331;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+@keyframes lamp-strobe-high {
+    from {
+        background-color: white;
+        -webkit-box-shadow: 0 0 2cm 2cm white;
+        -moz-box-shadow: 0 0 2cm 2cm white;
+        box-shadow: 0 0 2cm 2cm white;
+    }
+
+    49% {
+        background-color: white;
+        -webkit-box-shadow: 0 0 2cm 2cm white;
+        -moz-box-shadow: 0 0 2cm 2cm white;
+        box-shadow: 0 0 2cm 2cm white;
+    }
+
+    50% {
+        background-color: #331;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    to {
+        background-color: #331;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+@keyframes lamp-fade {
+    from {
+        background-color: white;
+        -webkit-box-shadow: 0 0 2cm 2cm white;
+        -moz-box-shadow: 0 0 2cm 2cm white;
+        box-shadow: 0 0 2cm 2cm white;
+    }
+
+    to {
+        background-color: #331;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}

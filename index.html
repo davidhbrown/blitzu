@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blitzu Cyclops 120H Simulator</title>
+    <link rel="stylesheet" href="blitzu.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="blitzu.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Blitzu Cyclops 120H Simulator</h1>
+        <p>
+            A state machine example based on one of my older bicycle headlights. Here are links to the
+            <a href="https://web.archive.org/web/20160410193504/https://www.blitzugear.com/collections/headlights/products/cyclops-120h-usb-rechargeable-headlight" target="_blank">
+                product page [via web.archive.org]</a> and you to an
+            <a href="https://youtu.be/xDi5f0f2Jxo?t=58" target="_blank">instruction video</a> on YouTube (fortunately still there).
+            Use the red button to operate the headlight.
+            The headlight responds differently to quick and to 2-second presses.
+        </p>
+    </header>
+    <main>
+        <div id="lamp" class="lamp-off" title="The real-world appearance is a little more interesting!">&nbsp;</div>
+        <button id="button" title="Press here">&nbsp;</button>
+        <section id="warning">
+            <h2><strong>Seizure Warning:</strong></h2>
+            <p><q>For about 3 percent of people with epilepsy, exposure to flashing lights at
+                    certain intensities or to certain visual patterns can trigger seizures.</q> This program produces high-constrast
+                flashes at 2Hz and 8Hz, within the 5Hz-30Hz range most likely to trigger seizures.</p>
+            <p><button>Click here to acknowledge the warning and enable the simulator</button></p>
+            <p>(Source:
+                <a href="http://www.epilepsy.com/learn/triggers-seizures/photosensitivity-and-seizures">Epilepsy Foundation</a>)</p>
+        </section>
+    </main>
+    <footer>
+        <!-- slightly annoyed that the CCL makes HTML5 validation fail, but oh well. -->
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+        <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Blitzu Cyclops 120H Simulator</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">David H. Brown</span> is licensed
+        under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+            Attribution-ShareAlike 4.0 International License</a>.
+        <br>
+        The Blitzu word mark (not used on this page) is a registered trademark of JKL Innovation Corp.
+    </footer>
+</body>
+
+</html>
